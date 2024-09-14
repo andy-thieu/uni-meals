@@ -5,9 +5,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 interface Canteen {
-    id: string
-    name: string
-    universities: string[]
+    id: string;
+    name: string;
+    universities: string[];
 }
 
 export default function Home() {
@@ -30,6 +30,7 @@ export default function Home() {
     const [allCanteens, setAllCanteens] = useState<Canteen[]>([]);
     const [filteredCanteens, setFilteredCanteens] = useState<Canteen[]>([]);
     const [selectedUniName, setSelectedUniName] = useState<string>("");
+    const [selectedUniAbbreviation, setSelectedUniAbbreviation] = useState<string>("HTW");
 
     const fetchCanteens = async () => {
         try {
@@ -39,7 +40,9 @@ export default function Home() {
                 }
             });
             setAllCanteens(response.data);
-            setSelectedUniName(uniMapping["HTW"]);
+            const defaultAbbreviation = "HTW";
+            setSelectedUniAbbreviation(defaultAbbreviation);
+            setSelectedUniName(uniMapping[defaultAbbreviation]);
         } catch (error) {
             console.error("Error fetching canteens:", error);
         }
@@ -53,12 +56,13 @@ export default function Home() {
         const filtered = allCanteens.filter(canteen =>
             canteen.universities.includes(selectedUniName)
         );
-            setFilteredCanteens(filtered);
+        setFilteredCanteens(filtered);
     }, [allCanteens, selectedUniName]);
 
     const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedUniAbbreviation = event.target.value;
-        const selectedUniName = uniMapping[selectedUniAbbreviation];
+        const selectedUniName = uniMapping[selectedUniAbbreviation] || "";
+        setSelectedUniAbbreviation(selectedUniAbbreviation);
         setSelectedUniName(selectedUniName);
     };
 
@@ -67,7 +71,7 @@ export default function Home() {
             <header className={styles.header}>
                 <h1 className={styles.title}>uni/meals</h1>
                 <div className={styles.selectWrapper}>
-                    <select value={selectedUniName} onChange={handleSelectChange}>
+                    <select value={selectedUniAbbreviation} onChange={handleSelectChange}>
                         {uniMapping && Object.keys(uniMapping).map((uniAbbreviation: string, index: number) => (
                             <option key={index} value={uniAbbreviation}>
                                 {uniAbbreviation}
@@ -84,7 +88,7 @@ export default function Home() {
                 </div>
             </header>
             <main className={styles.main}>
-                <h2>Speisepläne</h2>
+                <h2>Speiseplan</h2>
             </main>
         </div>
     );
