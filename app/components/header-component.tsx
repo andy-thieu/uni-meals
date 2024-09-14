@@ -61,9 +61,9 @@ function HeaderComponent({ canteens, onCanteenSelect }: HeaderComponentProps) {
     };
 
     const handleCanteenSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedCanteenName = event.target.value;
-        setSelectedCanteen(selectedCanteenName);
-        onCanteenSelect(selectedCanteenName); // Call parent callback with selected canteen
+        const selectedCanteenId = event.target.value;
+        setSelectedCanteen(selectedCanteenId);
+        onCanteenSelect(selectedCanteenId); // Call parent callback with selected canteen
     };
 
     return (
@@ -81,7 +81,7 @@ function HeaderComponent({ canteens, onCanteenSelect }: HeaderComponentProps) {
                     <select className={styles.canteenSelect} value={selectedCanteen ?? ""} onChange={handleCanteenSelect}>
                         <option value="">Select a canteen</option>
                         {filteredCanteens.map((canteen, index) => (
-                            <option key={index} value={canteen.name}>
+                            <option key={index} value={canteen.id}>
                                 {canteen.name}
                             </option>
                         ))}

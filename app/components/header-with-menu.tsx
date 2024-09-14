@@ -27,7 +27,7 @@ export default function HeaderWithMenu({ canteens }: HeaderWithMenuProps) {
             <HeaderComponent canteens={canteens} onCanteenSelect={handleCanteenSelect} />
 
             {/* Render MenuComponent based on the selected canteen */}
-            {selectedCanteen && <MenuComponent canteenName={selectedCanteen} />}
+            {selectedCanteen && <MenuComponent canteenId={selectedCanteen} />}
         </div>
     );
 }
