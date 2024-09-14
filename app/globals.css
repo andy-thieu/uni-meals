@@ -1,13 +1,15 @@
-@import 'normalize.css';
 body {
     margin: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
 }
 
 select{
-    padding: 6px;
+    padding: 6px 10px 6px 10px;
     background-color: white;
     border: 1px solid black;
+    appearance: none;
+    border-radius: 0;
+}
+h1 {
+    appearance: none;
+    font-weight: 400;
 }
