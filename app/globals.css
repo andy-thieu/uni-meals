@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+}
+
+select{
+    padding: 6px;
+    background-color: white;
+    border: 1px solid black;
+}
